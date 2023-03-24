@@ -1,0 +1,13 @@
+.NavBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.ActiveLink {
+  background-color: orange;
+}
+
+.Link {
+  background-color: yellow;
+}
