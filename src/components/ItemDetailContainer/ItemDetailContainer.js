@@ -1,6 +1,4 @@
-import './ItemDetailContainer.css'
 import { useState, useEffect } from 'react'
-// import { getProductById } from '../../asyncMock'
 import ItemDetail from '../ItemDetail/ItemDetail'
 import { useParams } from 'react-router-dom'
 import { getDoc, doc } from 'firebase/firestore'
@@ -8,9 +6,10 @@ import { db } from '../../services/firebase/firebaseConfig'
 
 const ItemDetailContainer = () => {
     const [product, setProduct] = useState()
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
 
     const { itemId } = useParams()
-
 
     useEffect(() => {
         const productRef = doc(db, 'products', itemId)
@@ -23,17 +22,16 @@ const ItemDetailContainer = () => {
             }).catch(error => {
                 console.log(error)
             })
-        // getProductById(itemId).then(response => {
-        //     setProduct(response)
-        // }).catch(error => {
-        //     console.log(error)
-        // })
+        //getProductById(itemId).then(response => {
+        //    setProduct(response)
+        //}).catch(error => {
+        //    console.log(error)
+        //})
     }, [itemId])
 
-
-    return(
+    return (
         <div className='ItemDetailContainer' >
-            <ItemDetail  {...product} />
+            <ItemDetail {...product} />
         </div>
     )
 }

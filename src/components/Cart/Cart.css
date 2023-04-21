@@ -1,0 +1,72 @@
+.cartCount {
+    background-color: #E5E5E5;
+    border: 15px solid  #d68fff;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+}
+
+
+.cartCount h1{
+    font-size: 2.3rem;
+    padding-top: 10px;
+    
+    
+    
+    text-decoration: none;
+    text-align: center;
+}
+
+.cartCount .button{
+    display: grid;
+    text-align: center;
+    margin: auto;
+    display: block;
+    background-color: #39c653;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 40px;
+    border-radius: 5px;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 20px;
+    padding: 20px;
+} 
+.botonCart{
+    text-align: center;
+    margin: auto;
+    display: block;
+    
+}
+
+.cartCount .total{
+    padding: 30px;
+    color: #114f6cfa;
+    font-size: 25px;
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: 5px;
+}
+
+.cart {
+    width: auto;
+    height: auto;
+   
+    width: 70%;
+    margin: 0 auto
+}
+
+.cartDetail {
+    font-size: 30px;
+   
+    color: #ff0000;
+    
+    text-align: center;
+    
+}
+.cartName{
+    
+    color: #000000;
+}

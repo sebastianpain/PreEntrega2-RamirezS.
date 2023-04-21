@@ -4,7 +4,9 @@
   justify-content: space-around;
   align-items: center;
   height: 60px;
-  background: wheat;
+  background: rgb(242, 186, 81);
+  
+
 }
 
 .Categories {
@@ -14,11 +16,11 @@
 }
 
 .Option {
-  /* color: #8C30F5; */
+  
   text-decoration: none;
   border-radius: 25;
   margin: 0 50px;
-  /* TODO */
+
   width: auto;
   padding: 12px;
   font-size: 8px;
@@ -40,11 +42,11 @@
 }
 
 .ActiveOption {
-  /* color: #8C30F5; */
+  color: #8C30F5;
   text-decoration: none;
   border-radius: 25;
   margin: 0 50px;
-  /* TODO */
+  
   width: auto;
   padding: 12px;
   font-size: 15px;
@@ -66,5 +68,5 @@
 }
 
 .NavLink {
-  color :rgb(255, 0, 0)
+  color :#8049a0
 }

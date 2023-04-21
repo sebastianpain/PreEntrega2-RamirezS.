@@ -1,93 +1,86 @@
-import { useContext, useState } from 'react'
-import { CartContext } from '../../context/CartContext'
-import { db } from '../../services/firebase/firebaseConfig'
-import { documentId, getDocs, query, collection, where, writeBatch, addDoc } from 'firebase/firestore'
-import { useNotification } from '../../notification/NotificationService'
-import { useNavigate } from 'react-router-dom'
+import React, { useContext } from 'react';
+import "./Checkout.css"
+import { useNavigate } from 'react-router-dom';
+import { createOrderBuy,getOrderBuy } from '../../services/firebase/firestore/orders';
+import { getProducts, getProductsById } from "../../services/firebase/firestore/products";
+import { CartContext } from '../../context/CartContext';
+import Swal from "sweetalert2"
 
 const Checkout = () => {
-    const [orderId, setOrderId] = useState('')
-    const [loading, setLoading] = useState(false)
-    const { cart, total, clearCart } = useContext(CartContext)
+    const {getTotal, cart, clearCart} = useContext(CartContext)
+    const datosFormulario = React.useRef()
+    let navigate = useNavigate()
 
+    const consultForm = (e) => {
+        e.preventDefault()
+        const datForm = new FormData(datosFormulario.current)
+        const cliente = Object.fromEntries(datForm)
 
-    const { setNotification } = useNotification()
+        const aux = [...cart]
 
-    const navigate = useNavigate()
-
-    const handleConfirm = async (userData) => {
-        try{ 
-            setLoading(true)
-            const objOrder = {
-                buyer: {
-                    name: 'Sebastian Zuviria',
-                    phone: '123456789',
-                    address: 'mi direaccion 123'
-                },
-                items: cart,
-                total: total
-            }
-
-            const ids = cart.map(prod => prod.id)
-
-            const productRef = query(collection(db, 'products'), where(documentId(), 'in', ids))
-
-            const productsAddedFromFirestore = await getDocs(productRef)
-
-            const { docs } = productsAddedFromFirestore
-
-            const batch = writeBatch(db)
-            const outOfStock = []
-
-            docs.forEach(doc => {
-                const dataDoc = doc.data()
-                const stockDb = dataDoc.stock
-
-                const productAddedToCart = cart.find(prod => prod.id === doc.id)
-                const prodQuantity = productAddedToCart?.quantity
-
-                if(stockDb >= prodQuantity) {
-                    batch.update(doc.ref, { stock: stockDb - prodQuantity})
+        aux.forEach(prodCarrito => {
+            getProducts(prodCarrito.id).then(prod => {
+                if(prod.stock >= prodCarrito.quantity) {
+                    prod.stock -= prodCarrito.quantity
+                    getProductsById(prodCarrito.id, prod)
                 } else {
-                    outOfStock.push({ id: doc, ...dataDoc})
                 }
             })
+        })
 
-            if(outOfStock.length === 0) {
-                batch.commit()
-
-                const orderRef = collection(db, 'orders')
-
-                const orderAdded = await addDoc(orderRef, objOrder)
+        createOrderBuy(cliente, getTotal , new Date().toISOString()).then(ordenCompra => {
+            getOrderBuy(ordenCompra.id)
+            .then(item => {
+                Swal.fire(
+                    'Compra finalizada',
+                    `¡Muchas gracias por su compra, su orden es ${item.id}!`,
+                    'success'
+                )
                 clearCart()
-                setOrderId(orderAdded.id)
-
-                setTimeout(() => {
-                    navigate('/')
-                }, 5000)
-
-            } else {
-                setNotification('error', 'Hay productos que no tienen stock disponible')
-            } 
-        } catch (error) {
-            setNotification('error', 'Hubo un error generando la orden')
-        } finally {
-            setLoading(false)
-        }
+                e.target.reset()
+            }).catch(error => {
+                Swal.fire(
+                    'Error',
+                    `Hubo un error con su orden. Vuelva a intentarlo`,
+                    'error'
+                )
+            })
+            
+        })
     }
-    
-    if(loading) {
-        return <h1>SE esta generando su orden...</h1>
-    }
-
-    return (
-        <div>
-            <h1>Checkout</h1>
-
-            {/* <Form onConfirm={handleConfirm}/> */}
-            { orderId ? <h2>El id de su orden es: {orderId}</h2> : <button onClick={handleConfirm}>Generar orden</button> }
-        </div>
-    )
+        
+        return (
+            <div className='FormularioReact'>
+                <h1 className='h1Formulario'>Complete sus datos para terminar la compra</h1>
+                <form onSubmit={consultForm} ref={datosFormulario}>
+                <div>
+                    <label htmlFor="nombre" className="form-label">Nombre y Apellido</label>
+                    <input type="text" className="form-control" name="nombre" />
+                </div>
+                <div>
+                    <label htmlFor="email" className="form-label">Email</label>
+                    <input type="email" className="form-control" name="email" />
+                </div>
+                <div>
+                    <label htmlFor="email2" className="form-label">Repetir Email</label>
+                    <input type="email" className="form-control" name="email2" />
+                </div>
+                <div>
+                    <label htmlFor="dni" className="form-label">DNI</label>
+                    <input type="number" className="form-control" name="dni" />
+                </div>
+                <div>
+                    <label htmlFor="celular" className="form-label">Numero telefonico</label>
+                    <input type="number" className="form-control" name="celular" />
+                </div>
+                <div>
+                    <label htmlFor="direccion" className="form-label">Dirección</label>
+                    <input type="text" className="form-control" name="direccion" />
+                </div>
+                <button type="submit" className="botonFormulario">Finalizar Compra</button>
+            </form>
+            </div>
+        )
 }
 
 export default Checkout
