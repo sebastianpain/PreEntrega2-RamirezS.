@@ -1,37 +1,53 @@
-<<<<<<< HEAD
 import CartWidget from '../CartWidget/CartWidget'
 import './NavBar.css'
-
 import { Link, NavLink } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
+import { useEffect, useState } from 'react'
+import { collection, getDocs, query, orderBy } from 'firebase/firestore'
+import { db } from '../../services/firebase/firebaseConfig'
 
 const NavBar = () => {
-    return (
-        <nav className="NavBar">
-            <h1>Ecommerce</h1>
-            <div>
-                <NavLink to='/Item/1' className={({ isActive }) => isActive ? 'ActiveLink' : 'Link'}>Remeras</NavLink>
-                <NavLink to='/Item/2'className={({ isActive }) => isActive ? 'ActiveLink' : 'Link'}>Pantalones</NavLink>
-                <NavLink to='/Item/3' className={({ isActive }) => isActive ? 'ActiveLink' : 'Link'}>Buzos</NavLink>
-            </div>
+  const [categories, setCategories] = useState([])
+  const { user } = useAuth()
+
+  useEffect(() => {
+    const categoriesRef = query(collection(db, 'categories'), orderBy('order'))
+
+    getDocs(categoriesRef)
+      .then(snapshot => {
+          const categoriesAdapted = snapshot.docs.map(doc => {
+            const data = doc.data()
+
+            return { id: doc.id, ...data }
+          })
+
+          setCategories(categoriesAdapted)
+      }).catch(error => {
+        console.log(error)
+      })
+  }, [])
+
+  return (
+    <nav className="NavBar" >
+        <Link to='/'>Ecommerce</Link>
+        <div className="Categories">
+            {
+              categories.map(cat => {
+                return (
+                  <NavLink key={cat.id} to={`/category/${cat.slug}`} className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}>{cat.label}</NavLink>
+                )
+              }) 
+            }
+        </div>
+        {
+          user ? (
             <CartWidget />
-        </nav>
-    )
+          ) : (
+            <NavLink to='/login' className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}>Login</NavLink>
+          )
+        }
+    </nav>
+  )
 }
 
 export default NavBar
-=======
-import { Link } from "react-router-dom"
-const NavBar = () => {
-    return(
-        <nav>
-            <h1>Ecommerce</h1>
-            <div>
-                <Link to='/item1/Remeras'>Remeras</Link>
-                <Link to='/item2/Pantalones'>Pantalones</Link>
-                <Link to='/item3/Buzos'>Buzos</Link>
-            </div>
-        </nav>
-    )
-}
-export default NavBar
->>>>>>> cd92e069c7458bac45182549b9e655842eaada8b

@@ -4,7 +4,7 @@ const Button = (props) => {
                 onClick={props.handleClick}
                 style={{
                     color: 'white',
-                    backgroundColor: 'red'
+                    backgroundColor: 'red',
                 }}
             >
                     {props.label}

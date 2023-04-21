@@ -1,18 +1,30 @@
-import { Link } from "react-router-dom"
+import './Item.css'
+import { Link, useNavigate } from 'react-router-dom'
 
-const Item = ({ id, name, price }) => {
+const Item = ({id, name, img, price }) => {
 
-    const handleClick = (e) => {
-        e.stopPropagation()
-        console.log('item')
-    }
+    // const navigate = useNavigate()
 
     return (
-        <div style={{ background: 'orange', margin: 10}} onClick={handleClick}>
-            <h2>{name}</h2>
-            <h3>precio: {price}</h3>
-            <Link to={`/item/${id}`} style={{ background: 'white'}}>ver detalle</Link>
-        </div>
+        <article className="CardItem">
+            <header className="Header">
+                <h2 className="ItemHeader">
+                    {name}
+                </h2>
+            </header>
+            <picture>
+                <img src={img} alt={name} className="ItemImg"/>
+            </picture>
+            <section>
+                <p className="Info">
+                    Precio: ${price}
+                </p>
+            </section>           
+            <footer className='ItemFooter'>
+               <Link to={`/item/${id}`} className='Option'>Ver detalle</Link>
+               {/* <button onClick={() => navigate('/item')} className='Option'>Ver detalle</button> */}
+            </footer>
+        </article>
     )
 }
 
