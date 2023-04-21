@@ -1,12 +1,22 @@
-# Getting Started with Create React App
+# Mi proyecto de e-commerce 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Es una web de una tienda de ropa 
 
 ## Available Scripts
 
-In the project directory, you can run:
+ESTA WEB FUE CONSTRUIDA CON LA LIBRERIA DE JAVASCRIPT REACT
 
-### `npm start`
+### SE USARON LIBRERIAS COMO BOOTSTRAP 
+
+
+INSTALACIONES PARA QUE FUNCIONE ESTE PROYECTO: 
+
+git clone 
+
+npm o react-router-dom
+
+npm i
+
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
