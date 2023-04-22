@@ -11,25 +11,26 @@ ESTA WEB FUE CONSTRUIDA CON LA LIBRERIA DE JAVASCRIPT REACT
 
 INSTALACIONES PARA QUE FUNCIONE ESTE PROYECTO: 
 
-git clone 
+git clone https://github.com/sebastianpain/REACTFINAL-RamirezS.
 
 npm o react-router-dom
 
 npm i
 
-
+EL PROYECTO ESTA DISPONIBLE COMO : localhost:3000
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+### DENTRO DE APP ESTAN TODAS LAS ROUTES DEL PROYECTO
+Dentro del SRC se encuentran todas las carpetas relacionados al proyecto tanto como el index, services, hooks, componentes, etc
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### EN EL CART encontraras un formulario enlazado al componente Checkout
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -38,10 +39,24 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## EN EL LOGIN tendriamos la logica para poner usuario y contraseña
+## EN EL ITEM se encuentra la lógica de los productos
+## EN EL ITEMDETAIL los detalles de los productos
+## EN NAVBAR tendriamos la logica del navbar y el CSS de la mayoria del proyecto
 
-### `npm run eject`
+### MIS VARIABLES DE ENTERNO SON: 
+---------------------------------------------------------
+REACT_APP_apiKey=AIzaSyC2uwU4rrvKAxk9F1EH_kQZOUibF6zOt1U
+REACT_APP_authDomain=backendeco1abril.firebaseapp.com
+REACT_APP_projectId=backendeco1abril
+REACT_APP_storageBucket=backendeco1abril
+REACT_APP_messagingSenderId=721003362461
+REACT_APP_appId=1:721003362461:web:1ffe9394da310e0205bc74
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+
+
+
 
 If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
@@ -78,3 +93,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
