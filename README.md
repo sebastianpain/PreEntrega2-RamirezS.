@@ -47,12 +47,16 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### MIS VARIABLES DE ENTERNO SON: 
 ---------------------------------------------------------
 REACT_APP_apiKey=AIzaSyC2uwU4rrvKAxk9F1EH_kQZOUibF6zOt1U
+---------------------------------------------------------
 REACT_APP_authDomain=backendeco1abril.firebaseapp.com
+---------------------------------------------------------
 REACT_APP_projectId=backendeco1abril
+---------------------------------------------------------
 REACT_APP_storageBucket=backendeco1abril
+---------------------------------------------------------
 REACT_APP_messagingSenderId=721003362461
+---------------------------------------------------------
 REACT_APP_appId=1:721003362461:web:1ffe9394da310e0205bc74
-
 ----------------------------------------------------------
 
 
