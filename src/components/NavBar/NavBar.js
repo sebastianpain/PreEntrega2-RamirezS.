@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext'
 import { useEffect, useState } from 'react'
 import { collection, getDocs, query, orderBy } from 'firebase/firestore'
 import { db } from '../../services/firebase/firebaseConfig'
-
+import navbar from './assets/clothes.png'
 const NavBar = () => {
   const [categories, setCategories] = useState([])
   const { user } = useAuth()
@@ -29,7 +29,8 @@ const NavBar = () => {
 
   return (
     <nav className="NavBar" >
-        <Link to='/'>Ecommerce</Link>
+      
+        <Link to='/'><img src={navbar} /></Link>
         <div className="Categories">
             {
               categories.map(cat => {

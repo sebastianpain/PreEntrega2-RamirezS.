@@ -8,7 +8,10 @@
   
 
 }
-
+.NavBar img{
+height: 60px;
+width: 60px;
+}
 .Categories {
   display: flex;
   justify-content: space-around;
